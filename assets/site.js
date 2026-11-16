@@ -85,3 +85,7 @@ window.SOCIAL={facebook:'',instagram:'',linkedin:'',x:'',youtube:'',whatsapp:''}
  const share={facebook:`https://www.facebook.com/sharer/sharer.php?u=${u}`,linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${u}`,x:`https://twitter.com/intent/tweet?url=${u}&text=${t}`,whatsapp:`https://wa.me/?text=${t}%20${u}`,telegram:`https://t.me/share/url?url=${u}&text=${t}`,email:`mailto:?subject=${t}&body=${u}`};
  window.goSocial=()=>{document.querySelectorAll('[data-share]').forEach(a=>{a.href=share[a.dataset.share]});document.querySelectorAll('[data-follow]').forEach(a=>{const v=window.SOCIAL[a.dataset.follow];if(v){a.href=v;a.removeAttribute('data-spa')}})};}
 if(!window.GO_SPA){goInit();goSocial()}
+/* Apple-style scroll reveal */
+window.goReveal=()=>{if(!('IntersectionObserver' in window))return;const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+ document.querySelectorAll('main .band>.wrap>*:not(.rv)').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('rv');io.observe(el)}})};
+if(!window.GO_SPA)goReveal();

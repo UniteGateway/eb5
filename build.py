@@ -418,7 +418,7 @@ router_end = """<script>
   if(h!==cur){const t=document.getElementById('tpl-'+h);main.innerHTML='';main.appendChild(t.content.cloneNode(true));cur=h;document.title=t.dataset.title;
    document.querySelectorAll('.links a').forEach(a=>a.getAttribute('href')=='#'+h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
    const l=document.getElementById('links');if(l&&l.classList.contains('open')){l.classList.remove('open');const m=document.querySelector('.menu');m.setAttribute('aria-expanded',false);m.textContent='Menu'}
-   goInit();goSocial();}
+   goInit();goSocial();goReveal();}
   const el=anchor&&document.getElementById(anchor);if(el)el.scrollIntoView();else window.scrollTo(0,0)};
  addEventListener('hashchange',go);go()}
 </script>"""
