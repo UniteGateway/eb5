@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GoEB5 — US Green Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: confident, clear, advisory — an investor's briefing, not a sales flyer.
+   IDEA: a boarding pass / green-card journey from India to the US, paid for by building American energy and infrastructure.
+   PICTURE: a layered dawn scene — solar rows and a bridge on the horizon, a green card floating above.
+   COLOUR and TYPE: white ground, cobalt field, coral accent (from the US flag), sun yellow only in the picture; Outfit + Inter.
+   LAYOUT: full-width cobalt hero, then white bands; projects as cards with filters, a flag grid of every country, tools side by side. */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0d1220);--ink:light-dark(#0f172a,#eef1f8);--mute:light-dark(#4b5563,#a7b0c4);--field:light-dark(#1f3fbf,#16288a);--fieldink:#ffffff;--acc:#ff4d3d;--card:light-dark(#f3f5fb,#161d33);--line:light-dark(#dfe3ee,#2a3352);--sun:#ffc23d;--ok:light-dark(#0f7a45,#4ade80)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Outfit,system-ui,sans-serif;line-height:1.05;text-wrap:balance;margin:0 0 .4em}
+h1{font-size:clamp(34px,5vw,52px)}h2{font-size:clamp(28px,3.6vw,40px)}h3{font-size:20px;line-height:1.2}
+p{margin:0 0 1em;max-width:68ch}a{color:inherit}
+.band{padding:clamp(36px,5vw,72px) max(5vw,16px)}.wrap{max-width:1240px;margin:0 auto}
+.lede{color:var(--mute);font-size:17px}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+.fig{position:relative;min-height:340px}.fig>svg{position:absolute;inset:0;width:100%;height:100%}
+pre,.scroll{overflow-x:auto}
+/* top bar + nav */
+.top{background:var(--ink);color:var(--bg);font-size:13px;padding:6px max(5vw,16px);display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between}
+.top a{text-decoration:none}
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:16px;padding:10px max(5vw,16px);max-width:none}
+.logo{font:700 22px Outfit,sans-serif;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo b{color:var(--acc)}
+.links{display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;flex:1;scrollbar-width:none}
+.links a{flex:none;text-decoration:none;padding:10px 12px;border-radius:8px;font-size:15px;color:var(--mute)}
+.links a:hover{background:var(--card);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:10px;border:0;font:600 15px Inter,sans-serif;cursor:pointer;text-decoration:none;background:var(--acc);color:#fff}
+.btn.ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+@media(max-width:760px){nav .cta{display:none}}
+/* hero */
+.hero{color:#fff;background:linear-gradient(90deg,rgba(8,16,48,.92) 0%,rgba(8,16,48,.72) 45%,rgba(8,16,48,.15) 100%),url(img/hero.jpg) center/cover no-repeat;min-height:min(88vh,760px);display:flex;align-items:center}
+.hero .wrap{width:100%}.hero .wrap>div{max-width:680px}
+.photo{width:100%;height:100%;object-fit:cover;border-radius:18px;display:block}
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,4vw,56px);align-items:center}
+@media(max-width:860px){.split{grid-template-columns:minmax(0,1fr)}.split .photo{max-height:300px}}
+.banner{height:clamp(180px,26vw,300px);border-radius:18px;overflow:hidden;margin:6px 0 24px;position:relative}
+.banner img{width:100%;height:100%;object-fit:cover;display:block}
+.banner span{position:absolute;left:18px;bottom:16px;color:#fff;font:600 clamp(18px,2.4vw,26px) Outfit,sans-serif;text-shadow:0 2px 12px rgba(0,0,0,.6);max-width:80%}
+.credit{font-size:12px;opacity:.6}
+.hero p{color:#dbe3ff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 24px}
+.chips span{background:rgba(255,255,255,.12);border-radius:999px;padding:6px 12px;font-size:14px}
+.hero .fig{min-height:420px;border-radius:18px;overflow:hidden}
+.count{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:28px;padding:16px 18px;border-radius:14px;background:rgba(0,0,0,.18)}
+.count .t{display:flex;gap:14px}
+.count .t div{text-align:center;font:700 30px Outfit,sans-serif;line-height:1}
+.count .t small{display:block;font:500 12px Inter,sans-serif;opacity:.8;margin-top:4px}
+.count p{margin:0;font-size:14px;max-width:34ch}
+@media(max-width:600px){.hero{background:linear-gradient(180deg,rgba(8,16,48,.55),rgba(8,16,48,.9)),url(img/hero.jpg) 65% center/cover}}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border-radius:14px;overflow:hidden;margin-top:28px}
+.stats div{background:var(--bg);padding:20px}
+.stats b{display:block;font:700 clamp(26px,3vw,34px) Outfit,sans-serif;white-space:nowrap}
+.stats span{color:var(--mute);font-size:14px}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* projects */
+.alt{background:var(--card)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 24px}
+.filters button{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:500 15px Inter,sans-serif;cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:18px}
+.proj{background:var(--bg);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.proj .pimg{position:relative;height:190px;overflow:hidden}.proj .pimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}.proj:hover .pimg img{transform:scale(1.05)}.proj .pimg .tag{position:absolute;left:12px;top:12px;margin:0}
+.proj .in{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.tag{display:inline-block;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--card);margin-right:6px}
+.tag.s{background:#fff1c7;color:#6b4a00}.tag.i{background:#dbe5ff;color:#1f3fbf}
+.kv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:13px;color:var(--mute)}
+.kv b{display:block;color:var(--ink);font-size:16px;white-space:nowrap}
+.bar{height:8px;border-radius:9px;background:var(--card);overflow:hidden}.bar i{display:block;height:100%;background:var(--acc)}
+.proj .btn{margin-top:auto}
+.note{font-size:13px;color:var(--mute)}
+/* countries */
+.search{width:100%;max-width:420px;min-height:48px;padding:0 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:16px Inter,sans-serif}
+.regions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:10px;max-height:520px;overflow-y:auto;padding:2px}
+.flags button{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:14px Inter,sans-serif;text-align:left;cursor:pointer}
+.flags button:hover,.flags button[aria-pressed=true]{border-color:var(--field);box-shadow:inset 0 0 0 1px var(--field)}
+.flags .f{font-size:26px;line-height:1;flex:none}
+.cinfo{margin-top:16px;padding:16px 18px;border-radius:14px;background:var(--card);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.cinfo .f{font-size:44px}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:s;margin-top:24px}
+.steps li{list-style:none;border-top:3px solid var(--field);padding-top:14px}
+.steps li b{display:block;font:600 18px Outfit,sans-serif;margin-bottom:4px}
+.steps li span{color:var(--mute);font-size:15px}
+.steps small{display:block;color:var(--acc);font-weight:600;font-size:13px;margin-bottom:6px}
+@media(max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.steps{grid-template-columns:minmax(0,1fr)}}
+/* tools */
+.tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-top:24px}
+.panel{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px}
+label{display:block;font-size:14px;font-weight:500;margin:12px 0 6px}
+input,select,textarea{width:100%;min-height:46px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:16px Inter,sans-serif}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.total{margin-top:18px;padding:16px;border-radius:12px;background:var(--field);color:#fff}
+.total b{display:block;font:700 clamp(28px,4vw,38px) Outfit,sans-serif;white-space:nowrap}
+.total span{opacity:.85;font-size:14px}
+.q{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.q span{font-size:15px}
+.yn{display:flex;gap:6px;flex:none}
+.yn button{min-width:56px;min-height:44px;border-radius:9px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:500 14px Inter,sans-serif;cursor:pointer}
+.yn button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.res{margin-top:16px;padding:14px;border-radius:12px;background:var(--card);font-size:15px}
+@media(max-width:860px){.tools{grid-template-columns:minmax(0,1fr)}}
+/* faq + form */
+details{border-bottom:1px solid var(--line);padding:6px 0}
+summary{cursor:pointer;font:600 17px Outfit,sans-serif;padding:12px 0;min-height:44px;list-style-position:outside}
+details p{color:var(--mute)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,56px)}
+@media(max-width:860px){.two{grid-template-columns:minmax(0,1fr)}}
+.ok{display:none;margin-top:14px;padding:14px;border-radius:12px;background:var(--card);color:var(--ok);font-weight:500}
+footer{background:var(--ink);color:var(--bg)}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px}
+footer a{display:block;text-decoration:none;opacity:.8;padding:4px 0}
+footer .disc{font-size:13px;opacity:.7;margin-top:28px;border-top:1px solid rgba(127,127,127,.35);padding-top:18px;max-width:none}
+@media(max-width:760px){footer .cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.float{position:fixed;right:16px;bottom:16px;z-index:30;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+@media(prefers-reduced-motion:no-preference){.sunrise{animation:rise 2.4s ease-out both}@keyframes rise{from{transform:translateY(40px);opacity:.3}}}
+</style>
+</head>
+<body>
+<div class="top"><span>India's EB-5 desk · Hyderabad · Mumbai · Delhi · Bengaluru</span><span><a href="mailto:info@goeb5.in">info@goeb5.in</a> · Mon–Sat, 10am–7pm IST</span></div>
+<nav><div class="wrap">
+  <a class="logo" href="#top"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="8" fill="#1f3fbf"/><circle cx="15" cy="17" r="6" fill="#ffc23d"/><path d="M5 22h20" stroke="#fff" stroke-width="2.5"/><path d="M19 8l5 0-0 5" stroke="#ff4d3d" stroke-width="2.5" fill="none"/></svg>Go<b>EB5</b></a>
+  <div class="links">
+    <a href="#program">EB-5 program</a><a href="#projects">Investments</a><a href="#countries">Countries</a><a href="#process">Process</a><a href="#tools">Calculator</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
+  </div>
+  <a class="btn cta" href="#contact">Book consultation</a>
+</div></nav>
+
+<header class="hero band" id="top"><div class="wrap">
+  <div>
+    <h1>Your family's US green card, earned by building America's energy and infrastructure</h1>
+    <p class="lede" style="color:#dbe3ff">GoEB5 helps Indian and global families invest in vetted EB-5 solar and infrastructure projects — with independent counsel, clear fees and one team from first call to permanent green card.</p>
+    <div class="chips"><span>From $800,000 in TEA &amp; infrastructure projects</span><span>Spouse + children under 21 included</span><span>Set-aside visas currently open for India</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn" href="#contact">Free consultation</a><a class="btn ghost" href="#projects">See opportunities</a></div>
+    <div class="count" aria-live="polite">
+      <div class="t" id="cd"><div>--<small>days</small></div><div>--<small>hours</small></div><div>--<small>min</small></div></div>
+      <p><strong>Minimums rise on 1 January 2027.</strong> File Form I-526E before then to lock in today's $800,000 amount.</p>
+    </div>
+  </div>
+</div></header>
+
+<section class="band" id="program"><div class="wrap">
+  <div class="split"><div>
+  <h2>EB-5 in one minute</h2>
+  <p class="lede">The EB-5 Immigrant Investor Program grants US permanent residency to investors who place capital in a US business that creates at least 10 full-time American jobs. One investment covers the investor, spouse and unmarried children under 21.</p>
+  <p class="lede">Green card holders can live, work, study and start a business anywhere in the US, and may apply for citizenship after five years.</p>
+  </div><img class="photo" src="img/liberty.jpg" alt="Statue of Liberty with the Manhattan skyline" style="aspect-ratio:4/3"></div>
+  <div class="stats">
+    <div><b>$800,000</b><span>Minimum in a rural, high-unemployment (TEA) or infrastructure project</span></div>
+    <div><b>$1,050,000</b><span>Standard minimum outside a TEA</span></div>
+    <div><b>10 jobs</b><span>Full-time US jobs created per investor</span></div>
+    <div><b>32%</b><span>Of visas reserved: rural 20%, high-unemployment 10%, infrastructure 2%</span></div>
+  </div>
+  <p class="note" style="margin-top:12px">Amounts under the EB-5 Reform and Integrity Act of 2022; statutory inflation adjustment due 1 January 2027. Program authorised through 30 September 2027.</p>
+</div></section>
+
+<section class="band alt" id="projects"><div class="wrap">
+  <h2>Investment opportunities</h2>
+  <p class="lede">We focus on two sectors with long-term US demand and strong job creation: utility-scale solar and public infrastructure.</p>
+  <div class="filters" role="group" aria-label="Filter projects">
+    <button data-f="all" aria-pressed="true">All projects</button><button data-f="solar" aria-pressed="false">Solar</button><button data-f="infra" aria-pressed="false">Infrastructure</button><button data-f="open" aria-pressed="false">Open now</button>
+  </div>
+  <div class="grid" id="pgrid"></div>
+  <p class="note" style="margin-top:16px">Illustrative pipeline for website layout. Final projects, figures and terms come only from each offering's private placement memorandum.</p>
+</div></section>
+
+<section class="band" id="countries"><div class="wrap">
+  <div class="banner"><img src="img/countries.jpg" alt="New York skyline at sunset"><span>Families from 190+ countries invest through EB-5</span></div>
+  <h2>We serve investors from every country</h2>
+  <p class="lede">Choose your country to see how EB-5 works for you — visa availability, consular processing and documents for proving your source of funds.</p>
+  <input class="search" id="csearch" type="search" placeholder="Search a country" aria-label="Search a country">
+  <div class="filters regions" id="regions" role="group" aria-label="Filter by region"></div>
+  <div class="flags" id="flags"></div>
+  <div class="cinfo" id="cinfo"><span class="f">🇮🇳</span><div><h3 style="margin:0 0 4px">India</h3><span class="note">Unreserved EB-5 is backlogged for India, but rural, high-unemployment and infrastructure set-aside visas are currently available. H-1B and F-1 holders in the US may file I-485 concurrently.</span></div></div>
+</div></section>
+
+<section class="band alt" id="process"><div class="wrap">
+  <div class="banner"><img src="img/plane.jpg" alt="Aircraft wing above the clouds"><span>Your journey to America, step by step</span></div>
+  <h2>From first call to permanent green card</h2>
+  <ol class="steps" style="padding:0">
+    <li><small>Week 1</small><b>Discovery call</b><span>Your goals, family, timeline and source of funds reviewed.</span></li>
+    <li><small>Weeks 2–4</small><b>Project selection</b><span>Compare offerings, PPMs and due-diligence reports side by side.</span></li>
+    <li><small>Weeks 4–10</small><b>Funds &amp; I-526E</b><span>LRS remittance to escrow; your attorney files Form I-526E.</span></li>
+    <li><small>12–24 months</small><b>Conditional card</b><span>Consular visa or I-485 adjustment; 2-year conditional residency.</span></li>
+    <li><small>Year 2–3</small><b>Permanent card</b><span>Form I-829 shows jobs created; conditions removed.</span></li>
+  </ol>
+</div></section>
+
+<section class="band" id="tools"><div class="wrap">
+  <h2>Plan your investment</h2>
+  <div class="tools">
+    <div class="panel">
+      <h3>Total cost in rupees</h3>
+      <label for="amt">Investment type</label>
+      <select id="amt"><option value="800000">TEA / infrastructure — $800,000</option><option value="1050000">Standard — $1,050,000</option><option value="937500">Projected 2027 TEA — about $937,500</option></select>
+      <div class="row2">
+        <div><label for="adm">Project admin fee (USD)</label><input id="adm" type="number" inputmode="numeric" value="60000" min="0"></div>
+        <div><label for="leg">Legal &amp; filing (USD)</label><input id="leg" type="number" inputmode="numeric" value="35000" min="0"></div>
+      </div>
+      <div class="row2">
+        <div><label for="fx">USD to INR rate</label><input id="fx" type="number" step="0.01" value="88.50" min="1"></div>
+        <div><label for="fam">Family members</label><select id="fam"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></div>
+      </div>
+      <div class="total"><span>Total commitment</span><b id="tINR">₹0</b><span id="tUSD">$0</span></div>
+      <p class="note" style="margin-top:10px">Estimates only. Edit the rate to today's. Legal fees include USCIS I-526E ($11,160). LRS allows $250,000 per person per year, so families often remit across members.</p>
+      <p class="note" id="lrs"></p>
+    </div>
+    <div class="panel">
+      <h3>Quick eligibility check</h3>
+      <div id="quiz"></div>
+      <div class="res" id="qres">Answer the five questions to see where you stand.</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band alt" id="faq"><div class="wrap two">
+  <div>
+    <h2>Common questions</h2>
+    <details open><summary>What is the minimum investment today?</summary><p>$800,000 in a targeted employment area or infrastructure project, or $1,050,000 elsewhere. On 1 January 2027 both rise by a statutory inflation formula; the TEA amount is projected near $937,500.</p></details>
+    <details><summary>How long does it take?</summary><p>I-526E petitions commonly take 12–24 months. Set-aside categories are currently available for India, which can shorten the wait for the visa itself.</p></details>
+    <details><summary>Is my capital guaranteed back?</summary><p>No. EB-5 law requires capital to be "at risk". Projects plan an exit after the sustainment period, but repayment is never guaranteed — read each offering's risk section.</p></details>
+    <details><summary>Why solar and infrastructure?</summary><p>Both create many construction and operating jobs, have long-term contracted revenue, and infrastructure projects qualify for the $800,000 reduced amount and a dedicated 2% visa reserve.</p></details>
+    <details><summary>Do I need my own lawyer?</summary><p>Yes. We coordinate the work, but every investor should retain independent US immigration counsel and, where relevant, a chartered accountant for LRS and tax.</p></details>
+    <details><summary>Can my children study in the US meanwhile?</summary><p>Yes. Children under 21 are included as derivatives; once approved they pay in-state tuition at many public universities.</p></details>
+  </div>
+  <div id="contact">
+    <div class="banner" style="height:180px;margin-top:0"><img src="img/flag.jpg" alt="American flag between city towers"></div>
+    <h2>Book a free consultation</h2>
+    <form id="cform" class="panel" novalidate>
+      <div class="row2"><div><label for="n">Full name</label><input id="n" required autocomplete="name"></div><div><label for="p">Phone / WhatsApp</label><input id="p" type="tel" autocomplete="tel"></div></div>
+      <label for="e">Email</label><input id="e" type="email" required autocomplete="email">
+      <div class="row2"><div><label for="c">Country of residence</label><select id="c"></select></div><div><label for="i">Interested in</label><select id="i"><option>Solar projects</option><option>Infrastructure projects</option><option>Both</option><option>Not sure yet</option></select></div></div>
+      <label for="m">Message</label><textarea id="m" rows="3"></textarea>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14px"><input type="checkbox" id="consent" style="width:20px;min-height:20px;margin-top:2px"> I agree to be contacted by call, WhatsApp or email.</label>
+      <button class="btn" type="submit" style="width:100%;margin-top:12px">Request consultation</button>
+      <div class="ok" id="ok"></div>
+    </form>
+  </div>
+</div></section>
+
+<footer class="band"><div class="wrap">
+  <div class="cols">
+    <div><a class="logo" href="#top" style="opacity:1">Go<b>EB5</b></a><p style="opacity:.8;margin-top:10px">EB-5 investment advisory for families in India and worldwide. Solar and infrastructure opportunities across the United States.</p><p style="opacity:.8">Hyderabad, Telangana · info@goeb5.in</p></div>
+    <div><strong>Program</strong><a href="#program">About EB-5</a><a href="#process">Process</a><a href="#faq">FAQ</a></div>
+    <div><strong>Invest</strong><a href="#projects">Solar</a><a href="#projects">Infrastructure</a><a href="#tools">Calculator</a></div>
+    <div><strong>Company</strong><a href="#countries">Countries</a><a href="#contact">Contact</a><a href="#contact">Privacy</a></div>
+  </div>
+  <p class="disc">GoEB5 is not a law firm and does not give legal, tax or investment advice. Information on this site is general and not an offer to sell or a solicitation to buy securities; offers are made only through a project's private placement memorandum to qualified investors. EB-5 investments are at risk and may lose value. Immigration outcomes are decided solely by USCIS and the US Department of State. Consult independent immigration counsel and financial advisors. © 2026 GoEB5 · goeb5.in<br><span class="credit">Photography: Unsplash (Unsplash License).</span></p>
+</div></footer>
+
+<a class="btn float" href="#contact">Talk to an advisor</a>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+/* countdown to 1 Jan 2027 ET */
+const end=new Date('2027-01-01T00:00:00-05:00');
+const tick=()=>{let d=Math.max(0,end-new Date());const D=Math.floor(d/864e5),Hh=Math.floor(d/36e5)%24,M=Math.floor(d/6e4)%60;$('#cd').innerHTML=`<div>${D}<small>days</small></div><div>${Hh}<small>hours</small></div><div>${M}<small>min</small></div>`};tick();setInterval(tick,30000);
+/* projects */
+const P=[
+ {t:'solar',img:'p1',n:'Texas Solar + Storage 40 MWac',loc:'ERCOT region, Texas',cat:'Rural TEA',min:800000,jobs:420,raise:24,funded:62,open:1,d:'Single-axis tracker solar with bifacial modules and battery storage, selling power under a long-term offtake.'},
+ {t:'solar',img:'p2',n:'Arizona Community Solar Portfolio',loc:'Pinal County, Arizona',cat:'Rural TEA',min:800000,jobs:310,raise:18,funded:41,open:1,d:'Twelve distributed solar sites serving schools, farms and municipal buildings under 20-year contracts.'},
+ {t:'solar',img:'p3',n:'Nevada Solar Park & BESS 120 MW',loc:'Nye County, Nevada',cat:'Rural TEA',min:800000,jobs:560,raise:40,funded:100,open:0,d:'Utility-scale solar with 4-hour storage. Fully subscribed; shown for track record.'},
+ {t:'infra',img:'p4',n:'South Texas Freight Rail Corridor',loc:'Rio Grande Valley, Texas',cat:'Infrastructure set-aside',min:800000,jobs:380,raise:30,funded:35,open:1,d:'Public-private short-line rail upgrade and cross-border freight terminal sponsored by a regional transport authority.'},
+ {t:'infra',img:'p5',n:'Gulf Coast Logistics & Rail Hub',loc:'Houston, Texas',cat:'High-unemployment TEA',min:800000,jobs:640,raise:45,funded:58,open:1,d:'Intermodal rail yard, cold-chain warehouses and truck terminal next to the port corridor.'},
+ {t:'infra',img:'p6',n:'EV Charging Corridor I-10',loc:'Texas · New Mexico · Arizona',cat:'Infrastructure set-aside',min:800000,jobs:290,raise:20,funded:22,open:1,d:'Fast-charging hubs with on-site solar canopies along a 1,200-mile interstate corridor.'}];
+const fmt=n=>'$'+n.toLocaleString('en-US');
+let pf='all';
+const renderP=()=>{$('#pgrid').innerHTML=P.map((p,i)=>({p,i})).filter(({p})=>pf=='all'||(pf=='open'?p.open:p.t==pf)).map(({p,i})=>`<article class="proj"><div class="pimg"><img src="img/${p.img}.jpg" alt="${p.n}"><span class="tag ${p.t=='solar'?'s':'i'}">${p.t=='solar'?'Solar':'Infrastructure'}</span></div><div class="in"><div><span class="tag">${p.cat}</span></div><h3 style="margin:0">${p.n}</h3><span class="note">${p.loc}</span><p style="margin:0;font-size:15px">${p.d}</p><div class="kv"><div><b>${fmt(p.min)}</b>Minimum</div><div><b>${p.jobs}</b>Est. jobs</div><div><b>$${p.raise}M</b>EB-5 raise</div></div><div><div class="bar"><i style="width:${p.funded}%"></i></div><span class="note">${p.funded}% subscribed${p.open?'':' · closed'}</span></div><a class="btn ${p.open?'':'ghost'}" href="#contact" data-pn="${p.n}">${p.open?'Request brochure':'View case study'}</a></div></article>`).join('')||'<p>No projects in this view.</p>'};
+document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{pf=b.dataset.f;document.querySelectorAll('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x==b));renderP()});
+$('#pgrid').addEventListener('click',e=>{const a=e.target.closest('[data-pn]');if(a){$('#m').value='I would like the brochure for '+a.dataset.pn+'.';$('#i').value=a.dataset.pn.match(/Solar/)?'Solar projects':'Infrastructure projects'}});
+renderP();
+/* countries — every ISO country, grouped by region */
+const R={'Asia':'AF AM AZ BH BD BT BN KH CN CY GE HK IN ID IR IQ IL JP JO KZ KW KG LA LB MO MY MV MN MM NP KP OM PK PS PH QA SA SG KR LK SY TW TJ TH TL TR TM AE UZ VN YE','Europe':'AL AD AT BY BE BA BG HR CZ DK EE FI FR DE GR HU IS IE IT XK LV LI LT LU MT MD MC ME NL MK NO PL PT RO RU SM RS SK SI ES SE CH UA GB VA','Africa':'DZ AO BJ BW BF BI CV CM CF TD KM CG CD CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD TZ TG TN UG ZM ZW','Americas':'AG AR BS BB BZ BO BR CA CL CO CR CU DM DO EC SV GD GT GY HT HN JM MX NI PA PY PE PR KN LC VC SR TT US UY VE','Oceania':'AU FJ KI MH FM NR NZ PW PG WS SB TO TV VU'};
+let dn;try{dn=new Intl.DisplayNames(['en'],{type:'region'})}catch(e){dn={of:c=>c}}
+const flag=c=>c.replace(/./g,ch=>String.fromCodePoint(127397+ch.charCodeAt(0)));
+const C=Object.entries(R).flatMap(([r,s])=>s.split(' ').map(c=>({c,r,n:c=='XK'?'Kosovo':dn.of(c)}))).sort((a,b)=>a.n.localeCompare(b.n));
+const backlog={IN:'Unreserved EB-5 is backlogged for India, but rural, high-unemployment and infrastructure set-aside visas are currently available. H-1B and F-1 holders in the US may file I-485 concurrently.',CN:'Mainland-China-born investors face a long unreserved backlog; set-aside categories are currently available.',VN:'Vietnam-born investors should check the monthly Visa Bulletin; set-aside categories offer a faster route.',US:'US citizens are not eligible, but we work with US-based families sponsoring relatives abroad.'};
+let reg='All',sel='IN';
+$('#regions').innerHTML=['All',...Object.keys(R)].map(r=>`<button data-r="${r}" aria-pressed="${r=='All'}">${r}</button>`).join('');
+const renderC=()=>{const q=$('#csearch').value.trim().toLowerCase();const L=C.filter(x=>(reg=='All'||x.r==reg)&&(!q||x.n.toLowerCase().includes(q)));$('#flags').innerHTML=L.map(x=>`<button data-c="${x.c}" aria-pressed="${x.c==sel}"><span class="f">${flag(x.c)}</span>${x.n}</button>`).join('')||'<p>No country matches.</p>'};
+const showC=c=>{sel=c;const x=C.find(y=>y.c==c);$('#cinfo').innerHTML=`<span class="f">${flag(c)}</span><div><h3 style="margin:0 0 4px">${x.n}</h3><span class="note">${backlog[c]||`Investors from ${x.n} can apply for EB-5 at the current minimums. Visa numbers for ${x.n}-born applicants are generally current; we help prepare source-of-funds evidence and consular processing at the nearest US embassy.`}</span></div>`;$('#c').value=c;renderC()};
+$('#regions').onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;reg=b.dataset.r;document.querySelectorAll('[data-r]').forEach(x=>x.setAttribute('aria-pressed',x==b));renderC()};
+$('#flags').onclick=e=>{const b=e.target.closest('[data-c]');if(b)showC(b.dataset.c)};
+$('#csearch').oninput=renderC;
+$('#c').innerHTML=C.map(x=>`<option value="${x.c}">${flag(x.c)} ${x.n}</option>`).join('');$('#c').value='IN';
+renderC();
+/* calculator */
+const calc=()=>{const a=+$('#amt').value,ad=+$('#adm').value||0,l=+$('#leg').value||0,fx=+$('#fx').value||0,f=+$('#fam').value;const t=a+ad+l;$('#tUSD').textContent=fmt(t)+' · '+fmt(a)+' at-risk capital';$('#tINR').textContent='₹'+Math.round(t*fx/1e5).toLocaleString('en-IN')+' lakh';const yrs=Math.ceil(t/(250000*f));$('#lrs').textContent=`With ${f} family member${f>1?'s':''} remitting under LRS, about ${yrs} financial year${yrs>1?'s':''} needed at $250,000 each.`;try{localStorage.setItem('goeb5calc',JSON.stringify({fx,ad,l}))}catch(e){}};
+try{const s=JSON.parse(localStorage.getItem('goeb5calc'));if(s){$('#fx').value=s.fx;$('#adm').value=s.ad;$('#leg').value=s.l}}catch(e){}
+['amt','adm','leg','fx','fam'].forEach(id=>$('#'+id).addEventListener('input',calc));calc();
+/* eligibility */
+const Q=['Are you 18 or older?','Can you invest at least $800,000 plus fees?','Can you document the lawful source of these funds?','Are you free of serious criminal or immigration-fraud history?','Do you accept that the capital is at risk for several years?'];
+const A=Array(Q.length).fill(null);
+$('#quiz').innerHTML=Q.map((q,i)=>`<div class="q"><span>${q}</span><div class="yn"><button data-q="${i}" data-v="1" aria-pressed="false">Yes</button><button data-q="${i}" data-v="0" aria-pressed="false">No</button></div></div>`).join('');
+$('#quiz').onclick=e=>{const b=e.target.closest('[data-q]');if(!b)return;const i=+b.dataset.q;A[i]=+b.dataset.v;b.parentNode.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x==b));const done=A.filter(x=>x!==null).length;const yes=A.filter(x=>x===1).length;
+$('#qres').innerHTML=done<Q.length?`${done} of ${Q.length} answered.`:yes==Q.length?'<strong style="color:var(--ok)">You look like a strong EB-5 candidate.</strong> Book a consultation to match a project and start your source-of-funds file.':A[2]===0?'<strong>Source of funds is the key hurdle.</strong> Gifts, property sales and loans can all qualify with the right paperwork — talk to us.':'<strong>Some points need review.</strong> An advisor can tell you whether they can be resolved before you file.'};
+/* form */
+$('#cform').addEventListener('submit',e=>{e.preventDefault();const n=$('#n').value.trim(),em=$('#e').value.trim(),ok=$('#ok');ok.style.display='block';if(!n||!/^\S+@\S+\.\S+$/.test(em)){ok.style.color='var(--acc)';ok.textContent='Please enter your name and a valid email.';return}if(!$('#consent').checked){ok.style.color='var(--acc)';ok.textContent='Please tick the consent box so we can reach you.';return}ok.style.color='';ok.textContent=`Thank you, ${n}. This preview does not send data yet — connect the form to your CRM or email before going live.`});
+}
+</script>
+</body>
+</html>
